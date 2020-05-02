@@ -21,12 +21,16 @@ export class LoginComponent implements OnInit {
         res => {
           localStorage.setItem("token", res.token);
           this._router.navigate(['/user']);
-        }),
-      err => {
-        console.log(err);
-        // if (err.status === 401)
-        //   this._router.navigate(['/login']);
-      }
+        },
+        err => {
+          console.log("error occured", err.status);
+          if (err.status === 401) {
+            this.loginUserData.email = "";
+            this.loginUserData.password = "";
+            this._router.navigate(['/login']);
+          }
+        }
+      )
   }
 
 }
