@@ -23,14 +23,17 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/user']);
         },
         err => {
-          console.log("error occured", err.status);
+          // console.log("error occured", err.status);
           if (err.status === 401) {
-            this.loginUserData.email = "";
-            this.loginUserData.password = "";
+            this.resetUserData();
             this._router.navigate(['/login']);
           }
         }
       )
+  }
+
+  resetUserData = () => {
+    this.loginUserData = { email: "", password: "" }
   }
 
 }
